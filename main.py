@@ -99,7 +99,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', type=int, default=30)
     parser.add_argument('--batch_size', type=int, default=128)
     parser.add_argument('--d_latent', type=int, default=10)
-    parser.add_argument('--train_k', type=int, default=50)  # set train_k > 1 for IWAE
+    parser.add_argument('--train_k', type=int, default=1)  # set train_k > 1 for IWAE
     parser.add_argument('--test_k', type=int, default=100)
     parser.add_argument('--lr', type=float, default=0.001)
     parser.add_argument('--visualize', type=bool, default=True)
@@ -108,10 +108,19 @@ if __name__ == '__main__':
 
 """Results
 k=1::
-
+(Epoch 3) train loss : 152.010
+(Epoch 3) Estimated test NLL : 172.812
+(Epoch 4) train loss : 133.816
+(Epoch 4) Estimated test NLL : 183.185
+(Epoch 30) train loss : 92.471
+(Epoch 30) Estimated test NLL : 286.436
 k=5::
 (Epoch 30) train loss : 115.888
 (Epoch 30) Estimated test NLL : 112.213
+k=10::
+(Epoch 30) train loss : 114.586
+(Epoch 30) Estimated test NLL : 110.956
 k=50::
-
+(Epoch 30) train loss : 111.753
+(Epoch 30) Estimated test NLL : 110.096
 """
