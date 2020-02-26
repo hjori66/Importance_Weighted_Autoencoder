@@ -58,6 +58,16 @@ def test_epoch(net, loader, k, device):
     return loss
 
 
+def evaluate_wo(net, threshold=0.01):
+    params = list(net.named_parameters())
+    print(len(params))
+    for name, param in params:
+        print(name, param.size())
+    w_norm = np.sum(np.square(params[4][1]), 1)  # dec.layers.0.weight torch.Size([100, 10])
+    w_norm_max = np.max(w_norm)
+    return np.sum(w_norm > threshold * w_norm_max)
+
+
 # Main routine
 
 def main(args):
@@ -91,7 +101,10 @@ def main(args):
         train_losses.append(train_loss)
         test_losses.append(test_loss)
 
-    plot_loss(train_losses, test_losses, args.train_k)
+        # evaluate_wo(net)
+
+    if args.visualize:
+        plot_loss(train_losses, test_losses, args.train_k)
 
 
 if __name__ == '__main__':
@@ -102,7 +115,7 @@ if __name__ == '__main__':
     parser.add_argument('--train_k', type=int, default=1)  # set train_k > 1 for IWAE
     parser.add_argument('--test_k', type=int, default=100)
     parser.add_argument('--lr', type=float, default=0.001)
-    parser.add_argument('--visualize', type=bool, default=True)
+    parser.add_argument('--visualize', type=bool, default=False)
     args = parser.parse_args()
     main(args)
 
