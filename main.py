@@ -76,6 +76,7 @@ def main(args):
     net = IWAE(28 * 28, args.d_latent)
     net.to(device)
     optimizer = torch.optim.Adam(net.parameters(), lr=args.lr)
+    # optimizer = torch.optim.Adagrad(net.parameters(), lr=args.lr)
 
     train_losses = []
     test_losses = []
